@@ -38,12 +38,16 @@ function Board() {
 	};
 	
 	self.checkLine = function(y, number) {
+		if (!checkY(y)) throw new Error(self.INVALID_COORDINATES_ERROR + y);
+		
 		var linha = map[y];
 		
 		return linha.indexOf(number) === -1;
 	};
 	
 	self.checkColumn = function(x, number) {
+		if (!checkX(x)) throw new Error(self.INVALID_COORDINATES_ERROR + x);
+		
 		var coluna = map.map(function(el, i) {
 			return el[x];
 		});

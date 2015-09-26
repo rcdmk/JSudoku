@@ -125,7 +125,15 @@ describe('SUDOKU - Board', function () {
 
 			done();
 		});
+		
+		it('should throw an error if the provided line is out of range', function(done) {
+			var lineToCheck = 9;
+			
+			expect(board.checkLine).withArgs(lineToCheck, 1).to.throwException(board.INVALID_COORDINATES_ERROR + lineToCheck);
+
+			done();
 		});
+	});
 	
 	describe('#checkColumn(x, number)', function () {
 		it('should return true if the provided value does not exists in the line', function (done) {
@@ -155,5 +163,13 @@ describe('SUDOKU - Board', function () {
 
 			done();
 		});
+		
+		it('should throw an error if the provided line is out of range', function(done) {
+			var columnToCheck = 9;
+			
+			expect(board.checkColumn).withArgs(columnToCheck, 1).to.throwException(board.INVALID_COORDINATES_ERROR + columnToCheck);
+
+			done();
 		});
 	});
+});
