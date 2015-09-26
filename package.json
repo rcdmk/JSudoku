@@ -1,0 +1,19 @@
+{
+  "name": "JSudoku",
+  "version": "1.0.0",
+  "description": "A simple sudoku game clone",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha _tests/**/*.tests.js"
+  },
+  "keywords": [
+    "sudoku",
+    "game"
+  ],
+  "author": "RCDMK",
+  "license": "MIT",
+  "devDependencies": {
+    "expect.js": "^0.3.1",
+    "mocha": "^2.3.2"
+  }
+}
