@@ -40,21 +40,33 @@ describe('SUDOKU - Board', function () {
 
 	describe('#setNumber(x, y, number)', function () {
 		it('should set the provided coordinates with the provided value', function (done) {
-			expectedMap[5][5] = 1;
-			board.setNumber(5, 5, 1);
+			var x = 5,
+				y = 5,
+				numberToSet = 1;
+			
+			expectedMap[y][x] = numberToSet;
+			board.setNumber(x, y, numberToSet);
 
 			expect(board.getMap()).to.be.eql(expectedMap);
 
-			expectedMap[3][2] = 4;
-			board.setNumber(2, 3, 4);
+			x = 2;
+			y = 3;
+			numberToSet = 4;
+			
+			expectedMap[y][x] = numberToSet;
+			board.setNumber(x, y, numberToSet);
 
 			expect(board.getMap()).to.be.eql(expectedMap);
 
 			done();
 		});
 
-		it('should throw and error for positions out of the map', function (done) {
-			expect(board.setNumber).withArgs(1, 9, 5).to.throwException(board.INVALID_COORDINATES_ERROR + '1, 9');
+		it('should throw an error for positions out of the map', function (done) {
+			var x = 1,
+				y = 9,
+				numberToSet = 5;
+			
+			expect(board.setNumber).withArgs(x, y, numberToSet).to.throwException(board.INVALID_COORDINATES_ERROR + x + ', ' + y);
 
 			done();
 		});
@@ -62,18 +74,24 @@ describe('SUDOKU - Board', function () {
 
 	describe('#getNumber(x, y)', function () {
 		it('should return the number stored in the provided coordinates', function (done) {
-			var expectedNumber = 6;
-			expectedMap[3][2] = expectedNumber;
+			var expectedNumber = 6,
+				x = 2,
+				y = 3;
+				
+			expectedMap[y][x] = expectedNumber;
 
-			board.setNumber(2, 3, expectedNumber);
+			board.setNumber(x, y, expectedNumber);
 
-			expect(board.getNumber(2, 3)).to.be.equal(expectedNumber);
+			expect(board.getNumber(x, y)).to.be.equal(expectedNumber);
 
 			done();
 		});
 
-		it('should throw and error for positions out of the map', function (done) {
-			expect(board.getNumber).withArgs(9, 1).to.throwException(board.INVALID_COORDINATES_ERROR + '9, 1');
+		it('should throw an error for positions out of the map', function (done) {
+			var x = 9,
+				y = 1;
+			
+			expect(board.getNumber).withArgs(x, y).to.throwException(board.INVALID_COORDINATES_ERROR + x + ', ' + y);
 
 			done();
 		});
@@ -107,7 +125,7 @@ describe('SUDOKU - Board', function () {
 
 			done();
 		});
-	});
+		});
 	
 	describe('#checkColumn(x, number)', function () {
 		it('should return true if the provided value does not exists in the line', function (done) {
@@ -137,5 +155,5 @@ describe('SUDOKU - Board', function () {
 
 			done();
 		});
+		});
 	});
-});
