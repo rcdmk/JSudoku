@@ -96,6 +96,24 @@ function Board() {
 		
 		return quadrantX + ((quadrantY - 1) * 3);
 	}
+	
+	self.checkQuadrant = function(x, y, number) {
+		var quadrant = self.getQuadrant(x, y);
+		
+		var quadrantX = Math.ceil(quadrant % 3);
+		var quadrantY = Math.ceil(quadrant / 3);
+		
+		var quadrantXMap = (quadrantX - 1) * 3;
+		var quadrantYMap = (quadrantY - 1) * 3;
+		
+		for(var yMap = quadrantYMap; yMap < quadrantYMap + 3; yMap++) {
+			for(var xMap = quadrantXMap; xMap < quadrantXMap + 3; xMap++) {
+				if (map[yMap][xMap] === number) return false;
+			}
+		}
+		
+		return true;
+	};
 }
 
 module.exports = Board;

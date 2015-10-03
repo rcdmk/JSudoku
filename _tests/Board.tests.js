@@ -1,10 +1,9 @@
 var expect = require('expect.js');
 
-var board;
-var expectedMap;
-
 describe('SUDOKU - Board', function () {
 	'use strict';
+	var board;
+	var expectedMap;
 
 	before(function (done) {
 		var Board = require('../src/Board');
@@ -34,9 +33,9 @@ describe('SUDOKU - Board', function () {
 
 	describe('#setNumber(x, y, number)', function () {
 		it('should set the provided coordinates with the provided value', function (done) {
-			var x = 5,
-				y = 5,
-				numberToSet = 1;
+			var x = 5;
+			var y = 5;
+			var numberToSet = 1;
 			
 			expectedMap[y][x] = numberToSet;
 			board.setNumber(x, y, numberToSet);
@@ -56,9 +55,9 @@ describe('SUDOKU - Board', function () {
 		});
 
 		it('should throw an error for positions out of the map', function (done) {
-			var x = 1,
-				y = 9,
-				numberToSet = 5;
+			var x = 1;
+			var y = 9;
+			var numberToSet = 5;
 			
 			expect(board.setNumber).withArgs(x, y, numberToSet).to.throwException(function(e) {
 				expect(e.name).to.be.equal(board.INVALID_COORDINATES_ERROR);
@@ -70,9 +69,9 @@ describe('SUDOKU - Board', function () {
 
 	describe('#getNumber(x, y)', function () {
 		it('should return the number stored in the provided coordinates', function (done) {
-			var expectedNumber = 6,
-				x = 2,
-				y = 3;
+			var expectedNumber = 6;
+			var x = 2;
+			var y = 3;
 				
 			expectedMap[y][x] = expectedNumber;
 
@@ -84,8 +83,8 @@ describe('SUDOKU - Board', function () {
 		});
 
 		it('should throw an error for positions out of the map', function (done) {
-			var x = 9,
-				y = 1;
+			var x = 9;
+			var y = 1;
 			
 			expect(board.getNumber).withArgs(x, y).to.throwException(function(e) {
 				expect(e.name).to.be.equal(board.INVALID_COORDINATES_ERROR);
@@ -97,8 +96,8 @@ describe('SUDOKU - Board', function () {
 
 	describe('#checkLine(y, number)', function () {
 		it('should return true if the provided value does not exists in the line', function (done) {
-			var lineToCheck = 3,
-				valueToSet = 7;
+			var lineToCheck = 3;
+			var valueToSet = 7;
 
 			expect(board.checkLine(lineToCheck, valueToSet)).to.be(true);
 
@@ -112,8 +111,8 @@ describe('SUDOKU - Board', function () {
 		});
 		
 		it('should return false if the provided value already exists in the line', function (done) {
-			var lineToCheck = 5,
-				valueToSet = 2;
+			var lineToCheck = 5;
+			var valueToSet = 2;
 
 			board.setNumber(8, lineToCheck, valueToSet);
 			expect(board.checkLine(lineToCheck, valueToSet)).to.be(false);
@@ -137,8 +136,8 @@ describe('SUDOKU - Board', function () {
 	
 	describe('#checkColumn(x, number)', function () {
 		it('should return true if the provided value does not exists in the line', function (done) {
-			var columnToCheck = 8,
-				valueToSet = 4;
+			var columnToCheck = 8;
+			var valueToSet = 4;
 
 			expect(board.checkColumn(columnToCheck, valueToSet)).to.be(true);
 
@@ -152,8 +151,8 @@ describe('SUDOKU - Board', function () {
 		});
 		
 		it('should return false if the provided value already exists in the line', function (done) {
-			var columnToCheck = 3,
-				valueToSet = 8;
+			var columnToCheck = 3;
+			var valueToSet = 8;
 
 			board.setNumber(columnToCheck, 2, valueToSet);
 			expect(board.checkColumn(columnToCheck, valueToSet)).to.be(false);
@@ -177,9 +176,9 @@ describe('SUDOKU - Board', function () {
 	
 	describe('#getQuadrant(x, y)', function() {
 		it('should return the board quadrant where the coordinates fall into', function(done) {
-			var x = 1,
-				y = 2,
-				expectedQuadrant = 1;
+			var x = 1;
+			var y = 2;
+			var expectedQuadrant = 1;
 			
 			expect(board.getQuadrant(x, y)).to.be.equal(expectedQuadrant);
 			
@@ -206,6 +205,44 @@ describe('SUDOKU - Board', function () {
 				expect(e.name).to.be.equal(board.INVALID_COORDINATES_ERROR);
 			});
 
+			done();
+		});
+	});
+	
+	describe('#checkQuadrant(x, y, number)', function() {
+		it('should return true if the provided number does not exists in the quadrant', function(done) {
+			var x = 3;
+			var y = 5;
+			var numberToCheck = 9;
+			
+			expect(board.checkQuadrant(x, y, numberToCheck)).to.be(true);
+			
+			x = 2;
+			y = 8;
+			numberToCheck = 5;
+			board.setNumber(x + 3, y, numberToCheck);
+			
+			expect(board.checkQuadrant(x, y, numberToCheck)).to.be(true);
+			done();
+		});
+		
+		it('should return false if the provided number already exists in the quadrant', function(done) {
+			var x = 2;
+			var y = 4;
+			var numberToCheck = 7;
+			
+			board.setNumber(x, y, numberToCheck);
+			expect(board.checkQuadrant(x, y, numberToCheck)).to.be(false);
+			
+			x = 1;
+			y = 3;
+			
+			expect(board.checkQuadrant(x, y, numberToCheck)).to.be(false);
+			
+			x = 0;
+			y = 5;
+			
+			expect(board.checkQuadrant(x, y, numberToCheck)).to.be(false);
 			done();
 		});
 	});
