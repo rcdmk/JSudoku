@@ -197,5 +197,16 @@ describe('SUDOKU - Board', function () {
 			
 			done();
 		});
+		
+		it('should throw an error if the provided coordinates out of range', function(done) {
+			var x = 9,
+				y = 1;
+			
+			expect(board.getQuadrant).withArgs(x, y).to.throwException(function(e) {
+				expect(e.name).to.be.equal(board.INVALID_COORDINATES_ERROR);
+			});
+
+			done();
+		});
 	});
 });

@@ -88,7 +88,9 @@ function Board() {
 		return coluna.indexOf(number) === -1;
 	};
 	
-	self.getQuadrant = function(x, y) {	
+	self.getQuadrant = function(x, y) {
+		checkCoordinates(x, y);
+		
 		var quadrantX = Math.ceil((x + 1) / 3);
 		var quadrantY = Math.ceil((y + 1) / 3);
 		
