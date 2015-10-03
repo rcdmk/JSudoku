@@ -66,7 +66,9 @@ describe('SUDOKU - Board', function () {
 				y = 9,
 				numberToSet = 5;
 			
-			expect(board.setNumber).withArgs(x, y, numberToSet).to.throwException(board.INVALID_COORDINATES_ERROR + x + ', ' + y);
+			expect(board.setNumber).withArgs(x, y, numberToSet).to.throwException(function(e) {
+				expect(e.name).to.be.equal(board.INVALID_COORDINATES_ERROR);
+			});
 
 			done();
 		});
@@ -91,7 +93,9 @@ describe('SUDOKU - Board', function () {
 			var x = 9,
 				y = 1;
 			
-			expect(board.getNumber).withArgs(x, y).to.throwException(board.INVALID_COORDINATES_ERROR + x + ', ' + y);
+			expect(board.getNumber).withArgs(x, y).to.throwException(function(e) {
+				expect(e.name).to.be.equal(board.INVALID_COORDINATES_ERROR);
+			});
 
 			done();
 		});
@@ -129,7 +133,9 @@ describe('SUDOKU - Board', function () {
 		it('should throw an error if the provided line is out of range', function(done) {
 			var lineToCheck = 9;
 			
-			expect(board.checkLine).withArgs(lineToCheck, 1).to.throwException(board.INVALID_COORDINATES_ERROR + lineToCheck);
+			expect(board.checkLine).withArgs(lineToCheck, 1).to.throwException(function(e) {
+				expect(e.name).to.be.equal(board.INVALID_COORDINATES_ERROR);
+			});
 
 			done();
 		});
@@ -145,7 +151,7 @@ describe('SUDOKU - Board', function () {
 			board.setNumber(columnToCheck, 2, 1);
 			expect(board.checkColumn(columnToCheck, valueToSet)).to.be(true);
 
-			board.setNumber(columnToCheck, 6, 8);
+			board.setNumber(columnToCheck, 6, 7);
 			expect(board.checkColumn(columnToCheck, valueToSet)).to.be(true);
 
 			done();
@@ -166,8 +172,10 @@ describe('SUDOKU - Board', function () {
 		
 		it('should throw an error if the provided line is out of range', function(done) {
 			var columnToCheck = 9;
-			
-			expect(board.checkColumn).withArgs(columnToCheck, 1).to.throwException(board.INVALID_COORDINATES_ERROR + columnToCheck);
+
+			expect(board.checkColumn).withArgs(columnToCheck, 1).to.throwException(function(e) {
+				expect(e.name).to.be.equal(board.INVALID_COORDINATES_ERROR);
+			});
 
 			done();
 		});
