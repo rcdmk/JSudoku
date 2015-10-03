@@ -13,17 +13,7 @@ describe('SUDOKU - Board', function () {
 	});
 
 	beforeEach(function (done) {
-		expectedMap = [
-			[0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0]
-		];
+		expectedMap = board.INITIAL_MAP;
 
 		board.init();
 
@@ -32,7 +22,10 @@ describe('SUDOKU - Board', function () {
 
 	describe('#init()', function () {
 		it('should init a matrix with 81 empty cells', function (done) {
-			expect(board.getMap()).to.be.eql(expectedMap);
+			var boardMap = board.getMap();
+			
+			expect(boardMap).to.be.ok();
+			expect(boardMap).to.be.eql(expectedMap);
 
 			done();
 		});
