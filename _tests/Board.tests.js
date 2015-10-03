@@ -173,4 +173,28 @@ describe('SUDOKU - Board', function () {
 			done();
 		});
 	});
+	
+	describe('#getQuadrant(x, y)', function() {
+		it('should return the board quadrant where the coordinates fall into', function(done) {
+			var x = 1,
+				y = 2,
+				expectedQuadrant = 1;
+			
+			expect(board.getQuadrant(x, y)).to.be.equal(expectedQuadrant);
+			
+			x = 4;
+			y = 7;
+			expectedQuadrant = 8;
+			
+			expect(board.getQuadrant(x, y)).to.be.equal(expectedQuadrant);
+			
+			x = 6;
+			y = 4;
+			expectedQuadrant = 6;
+			
+			expect(board.getQuadrant(x, y)).to.be.equal(expectedQuadrant);
+			
+			done();
+		});
+	});
 });

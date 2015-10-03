@@ -85,6 +85,13 @@ function Board() {
 			};
 		}
 	}
+	
+	self.getQuadrant = function(x, y) {
+		var quadrantX = Math.ceil((x + 1) / 3);
+		var quadrantY = Math.ceil((y + 1) / 3);
+		
+		return quadrantX + ((quadrantY - 1) * 3);
+	}
 }
 
 module.exports = new Board();
