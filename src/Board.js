@@ -28,6 +28,7 @@ function Board() {
 
 	// Public members
 	self.INVALID_COORDINATES_ERROR = 'InvalidCoordinates';
+	
 	self.INITIAL_MAP = [
 		[0, 0, 0, 0, 0, 0, 0, 0, 0],
 		[0, 0, 0, 0, 0, 0, 0, 0, 0],
