@@ -1,9 +1,32 @@
 function Board() {
 	'use strict';
 
+	// private members
 	var self = this;
 	var map = [];
+	
+	function checkValidNumber(number) {
+		return /^\d+$/.test(String(number));
+	}
 
+	function checkX(x) {
+		return checkValidNumber(x) && (x >= 0 && x < map[0].length);
+	}
+
+	function checkY(y) {
+		return checkValidNumber(y) && (y >= 0 && y < map.length);
+	}
+
+	function checkCoordinates(x, y) {
+		if (!checkX(x) || !checkY(y)) {
+			throw {
+				name: self.INVALID_COORDINATES_ERROR,
+				message: 'Invalid coordinates: ' + x + ', ' + y
+			};
+		}
+	}
+
+	// Public members
 	self.INVALID_COORDINATES_ERROR = 'InvalidCoordinates';
 	self.INITIAL_MAP = [
 		[0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -64,29 +87,8 @@ function Board() {
 
 		return coluna.indexOf(number) === -1;
 	};
-
-	function checkValidNumber(number) {
-		return /^\d+$/.test(String(number));
-	}
-
-	function checkX(x) {
-		return checkValidNumber(x) && (x >= 0 && x < map[0].length);
-	}
-
-	function checkY(y) {
-		return checkValidNumber(y) && (y >= 0 && y < map.length);
-	}
-
-	function checkCoordinates(x, y) {
-		if (!checkX(x) || !checkY(y)) {
-			throw {
-				name: self.INVALID_COORDINATES_ERROR,
-				message: 'Invalid coordinates: ' + x + ', ' + y
-			};
-		}
-	}
 	
-	self.getQuadrant = function(x, y) {
+	self.getQuadrant = function(x, y) {	
 		var quadrantX = Math.ceil((x + 1) / 3);
 		var quadrantY = Math.ceil((y + 1) / 3);
 		
