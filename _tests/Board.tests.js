@@ -7,8 +7,9 @@ describe('SUDOKU - Board', function () {
 	'use strict';
 
 	before(function (done) {
-		board = require('../src/Board');
-
+		var Board = require('../src/Board');
+		board = new Board();
+		
 		done();
 	});
 

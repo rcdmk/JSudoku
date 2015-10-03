@@ -94,4 +94,4 @@ function Board() {
 	}
 }
 
-module.exports = new Board();
+module.exports = Board;
